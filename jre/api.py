@@ -1,6 +1,27 @@
-import pandas as pd
-import json
-import requests
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# jre - Japan Real Estate Transaction Prices Downloader
+# https://github.com/helloryosuke/japan-real-estate-data
+#
+# Copyright 2021-2022 Ryosuke Inaba
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+import pandas as _pd
+import json as _json
+import requests as _requests
 from .data import TradeList
 from .data import CityList
 
@@ -32,10 +53,10 @@ class Response:
         """
         return self._value
 
-    def df(self) -> pd.DataFrame:
+    def df(self) -> _pd.DataFrame:
         """Get data in Pandas DataFrame format
         """
-        return pd.DataFrame(self._value)
+        return _pd.DataFrame(self._value)
 
 class Request:
     """Class to construct the request for the specified data field and execute request.
@@ -62,5 +83,5 @@ class Request:
             Response: response of request execution
         """
 
-        response = requests.get(self._url, timeout=timeout) # send request
-        return Response(json.loads(response.text)) # transform response to Response object
+        response = _requests.get(self._url, timeout=timeout) # send request
+        return Response(_json.loads(response.text)) # transform response to Response object
